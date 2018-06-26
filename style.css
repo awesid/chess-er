@@ -1,0 +1,50 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Markazi Text', serif;
+    font-size: 1.3em;
+    background-color: rgba(50,50,50,0.5);
+}
+
+
+#userModal{
+    background-color: rgba(0,0,0,0.8);
+}
+
+.modal-header{
+    background-color: black;
+    color: antiquewhite;
+    text-shadow: 1px 0px rgba(100,100,100,0.8);
+}
+
+.modal-footer{
+    background-color: black;
+    color: antiquewhite;
+    text-shadow: 1px 0px rgba(100,100,100,0.8);
+}
+#usernamebtn{
+    outline: none;
+    font-size:22px;
+    padding: 5px 20px;
+}
+#usernamebtn:hover, #usernamebtn:focus{
+    background-color: rgba(80,80,250,1);
+    outline: none;
+    color: antiquewhite;
+}
+
+#inputIsEmpty{
+    color: red;
+
+}
+
+#chessBoard{
+    margin: 2vw 25vw;   
+}
+
+
+.board img{
+    height: 5vw;
+    width: 5vw;
+}
