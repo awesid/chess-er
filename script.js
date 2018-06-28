@@ -18,11 +18,43 @@ usernamebtn.addEventListener('click',(event)=>{
 });
 */
 
-var chessBoard = document.getElementById('chessBoard');
-var board;
+//boardbtns holds all the buttons in the display
+//boardBtns hold the buttons with additional meta data required for game
+// board is numerical representation of the game being played
+
+
+
+var boardbtns; 
+
+// 5 : rook
+// 3 : knight
+// 4 : bishop
+// 9 : queen
+// 99999 : king
+// + : computer 
+// - : user
+
+var board = [ 5,3,4,99999,9,4,3,5,
+              1,1,1,1,1,1,1,1,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              0,0,0,0,0,0,0,0,
+              -1,-1,-1,-1,-1,-1,-1,-1,
+              -5,-3,-4,-99999,-9,-4,-3,-5
+            ];
+
+var boardBtns = [];
+var isUser = true;
+
+
+
+function swap(a) {return a;}
+
 
 function putPiece(i){
     switch(i){
+        //black 
         case 0: return `<img src = './res/blackRook.png'>`;
         case 1: return `<img src = './res/blackKnight.png'>`;
         case 2: return `<img src = './res/blackBishop.png'>`;
@@ -40,6 +72,7 @@ function putPiece(i){
         case 14:
         case 15: return `<img src="./res/blackPawn.png">`;
 
+        //white
         case 63: return `<img src = './res/whiteRook.png'>`;
         case 62: return `<img src='./res/whiteKnight.png'>`;
         case 61: return `<img src='./res/whiteBishop.png'>`;
@@ -61,28 +94,142 @@ function putPiece(i){
     }
 }
 
+
+var chessBoardColumn = document.getElementById('chessBoardColumn');
+
 function makeBoard() {
-    for(let i=0 ;i<64;i++){
-        var boardbtn = document.createElement('button');
-        boardbtn.className = "board";
-        boardbtn.style.height = "6vw";
-        boardbtn.style.width = "6vw";
-        boardbtn.style.border = "solid 0px"
-        boardbtn.innerHTML = putPiece(i);
-        chessBoard.appendChild(boardbtn);
+    
+    
+    for(let i=0 ;i<8;i++){
+        var chessBoardRow = document.createElement('div');
+        chessBoardRow.className = "btn-group";
+        chessBoardRow.setAttribute("role","group");
+        for(let j=0 ; j<8 ;j++){
+            var boardbtn = document.createElement('button');
+            boardbtn.className = "board btn";
+            boardbtn.type = "button"
+            boardbtn.innerHTML = putPiece(8*i+j);
+            chessBoardRow.appendChild(boardbtn);
+            
+        }
+        chessBoardColumn.appendChild(chessBoardRow);
     }
-    board = document.getElementsByClassName('board');
+
+
+    boardbtns = document.getElementsByClassName('board');
     for(let i = 0; i < 8; i++){
         for(j=0; j< 8 ; j++){
-            if(i%2==0 && j%2==0) board[8*i + j].style.backgroundColor = "white";
-            if(i%2==0 && j%2==1) board[8*i + j].style.backgroundColor = "black";
-            if(i%2==1 && j%2==1) board[8*i + j].style.backgroundColor = "white";
-            if(i%2==1 && j%2==0) board[8*i + j].style.backgroundColor = "black";
+            if(i%2==0 && j%2==0) boardbtns[8*i + j].style.backgroundColor = "white";
+            if(i%2==0 && j%2==1) boardbtns[8*i + j].style.backgroundColor = "black";
+            if(i%2==1 && j%2==1) boardbtns[8*i + j].style.backgroundColor = "white";
+            if(i%2==1 && j%2==0) boardbtns[8*i + j].style.backgroundColor = "black";
         }
-    }
-}
 
+    }
+
+
+    for(let i =0; i < 64 ; i++){
+        var temp = {
+            button : boardbtns[i],
+            isClicked : false,
+            isValid : false,
+            pieceValue : board[i],
+        }
+        boardBtns.push(temp);
+    }
+    listeners();
+}
 makeBoard();// put this inside the modal where username is taken to start the game
 
 
-//console.log(board);
+
+function setBoard() {
+    boardbtns = document.getElementsByClassName('board');
+    for(let i = 0; i < 8; i++){
+        for(j=0; j< 8 ; j++){
+            if(i%2==0 && j%2==0) boardbtns[8*i + j].style.backgroundColor = "white";
+            if(i%2==0 && j%2==1) boardbtns[8*i + j].style.backgroundColor = "black";
+            if(i%2==1 && j%2==1) boardbtns[8*i + j].style.backgroundColor = "white";
+            if(i%2==1 && j%2==0) boardbtns[8*i + j].style.backgroundColor = "black";
+        }
+
+    }
+}
+
+
+
+
+function listeners(){
+
+    for(let i=0;i<64;i++){
+        boardBtns[i].button.addEventListener('click',(event)=>{
+            event.preventDefault();
+            if(isUser){
+    
+                if(boardBtns[i].isClicked === false && boardBtns[i].pieceValue < 0 ){
+                    for(let j=0;j<64;j++){
+                        boardBtns[j].isValid = false;
+                        boardBtns[j].isClicked = false;
+                    }
+                    setBoard();
+                    boardBtns[i].button.style.backgroundColor = "rgb(80,80,250)";
+                    boardBtns[i].isClicked = true;
+                    userMoveGenerator(i);
+                    
+                }
+        
+                if(boardBtns[i].isClicked===false && boardBtns[i].isValid===true){
+                    for(let j = 0;j < 64; j++){
+                        if(boardBtns[j].isClicked === true){
+        
+                            if(board[i]===0){
+                                // when moves to an empty space
+                                boardBtns[i].button.innerHTML = swap(boardBtns[j].button.innerHTML, 
+                                    boardBtns[j].button.innerHTML = boardBtns[i].button.innerHTML);
+                                boardBtns[i].pieceValue = swap(boardBtns[j].pieceValue,
+                                    boardBtns[j].pieceValue=boardBtns[i].pieceValue);
+                                board[i] = swap(board[j],board[j]=board[i]);
+                                
+                                //pawn becomes queen
+                                if(boardBtns[i].pieceValue===-1 && i<8){
+                                    board[i]=-9;
+                                    boardBtns[i].button.innerHTML = `<img src='./res/whiteQueen.png'>`;
+                                    boardBtns[i].pieceValue = board[i];
+                                }
+                            }else{
+
+                                // when cuts an opponent
+                            
+                                boardBtns[i].button.innerHTML = boardBtns[j].button.innerHTML;
+                                boardBtns[i].pieceValue = boardBtns[j].pieceValue;
+                                board[i]=board[j];
+                                
+                                boardBtns[j].button.innerHTML = "";
+                                boardBtns[j].pieceValue=0;
+                                board[j]=0;
+                        
+
+                                //pawn becomes queen
+                                if(boardBtns[i].pieceValue===-1 && i<8){
+                                    board[i]=-9;
+                                    boardBtns[i].button.innerHTML = `<img src='./res/whiteQueen.png'>`;
+                                    boardBtns[i].pieceValue = board[i];
+                                }
+                                
+                            }
+
+
+                            boardBtns[j].isClicked = false;
+                            setBoard();
+                        }
+                    }
+                    for(let j=0;j<64;j++){
+                        boardBtns[j].isValid = false;
+                        boardBtns[j].isClicked=false;
+                    }
+                }
+            }
+        })
+    }
+}
+

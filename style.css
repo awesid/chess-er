@@ -5,6 +5,9 @@ body{
     font-family: 'Markazi Text', serif;
     font-size: 1.3em;
     background-color: rgba(50,50,50,0.5);
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
 }
 
 
@@ -39,12 +42,20 @@ body{
 
 }
 
-#chessBoard{
+#chessBoardColumn{
     margin: 2vw 25vw;   
 }
 
-
+.board{
+    box-sizing: content-box;
+    margin: 0px;
+    min-height: 6vw;
+    min-width: 6vw;
+    padding: 0px;
+    border: 1.5px solid black;
+}
 .board img{
+    box-sizing: content-box;
     height: 5vw;
     width: 5vw;
 }
