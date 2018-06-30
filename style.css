@@ -59,3 +59,18 @@ body{
     height: 5vw;
     width: 5vw;
 }
+
+@media screen and (max-width:768px){
+    #chessBoardColumn{
+        margin: 4vw;   
+    }
+    .board{
+        width: 12vw;
+        height: 12vw;
+    }
+    .board img{
+        box-sizing: content-box;
+        height: 11vw;
+        width: 11vw;
+    }
+}

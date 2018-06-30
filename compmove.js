@@ -10,32 +10,28 @@ function deleteFromArray(arr, val) {
 }
 
 
-function userMoveGenerator(n){
-    var pieceValue = boardBtns[n].pieceValue;
+function moveGenerator(n){
+    var pieceValue = board[n];
+    var validMoves = [];
     switch(pieceValue){
         case -1:{
             if(n<56 && n > 47){
                 if(board[n-8]===0){
-                    boardBtns[n-8].button.style.backgroundColor = "rgb(50,50,150)";
-                    boardBtns[n-8].isValid= true;
+                    validMoves.push(n-8);
                 }
                 if(board[n-16]===0){
-                    boardBtns[n-16].button.style.backgroundColor = "rgb(50,50,150)";
-                    boardBtns[n-16].isValid=true;
+                    validMoves.push(n-16);
                 }
             }else{
                 if(board[n-8]===0){
-                    boardBtns[n-8].button.style.backgroundColor = "rgb(50,50,150)";
-                    boardBtns[n-8].isValid=true;
+                    validMoves.push(n-8);
                 }
             }
             if(board[n-7]>0 && (n+1)%8!==0){
-                boardBtns[n-7].button.style.backgroundColor = "rgb(250,80,80)";
-                boardBtns[n-7].isValid=true;
+                validMoves.push(n-7);
             }
             if(board[n-9]>0 && n%8!==0){
-                boardBtns[n-9].button.style.backgroundColor = "rgb(250,80,80)";
-                boardBtns[n-9].isValid=true;
+                validMoves.push(n-9);
             }
             break;
         }
@@ -92,11 +88,9 @@ function userMoveGenerator(n){
 
             arr.forEach((item)=>{
                 if(board[n+item]>0){
-                    boardBtns[n+item].button.style.backgroundColor = "rgb(250,80,80)";
-                    boardBtns[n+item].isValid=true;
+                    validMoves.push(n+item);
                 }else if(board[n+item]===0){
-                    boardBtns[n+item].button.style.backgroundColor = "rgb(50,50,150)";
-                    boardBtns[n+item].isValid=true;
+                    validMoves.push(n+item);
                 }
 
             })
@@ -110,11 +104,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 7;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
         
                         if((k+1)%8===0 || k<0 || board[k]!==0) break;
@@ -125,11 +117,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 9;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         
                         if((k+1)%8===0 || k>63 || board[k]!==0) break;
@@ -140,11 +130,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 9;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
         
                         if((k)%8===0 || k<0 || board[k]!==0) break;
@@ -155,11 +143,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 7;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         if((k)%8===0 || k>63 || board[k]!==0) break;
                     }
@@ -170,11 +156,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 7;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
     
                     if((k+1)%8===0 || k<0 || board[k]!==0) break;
@@ -185,11 +169,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 9;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
                     
                     if((k+1)%8===0 || k>63 || board[k]!==0) break;
@@ -199,11 +181,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 9;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
     
                     if((k)%8===0 || k<0 || board[k]!==0) break;
@@ -214,11 +194,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 7;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
                     if((k)%8===0 || k>63 || board[k]!==0) break;
                 }
@@ -233,11 +211,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 8;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
         
                         if(k<0 || board[k]!==0) break;
@@ -248,11 +224,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 1;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         
                         if((k+1)%8===0 ||board[k]!==0) break;
@@ -262,11 +236,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 8;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -276,11 +248,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 1;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
         
                         if((k)%8===0 || board[k]!==0) break;
@@ -291,11 +261,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 8;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -304,11 +272,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 8;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -319,11 +285,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 8;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
     
                     if(k<0 || board[k]!==0) break;
@@ -334,11 +298,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 8;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
                     
                     if(k>63 || board[k]!==0) break;
@@ -348,11 +310,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 1;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
     
                     if((k)%8===0 ||board[k]!==0) break;
@@ -363,11 +323,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 1;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
                     if((k+1)%8===0 ||board[k]!==0) break;
                 }
@@ -385,11 +343,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 7;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
         
                         if((k+1)%8===0 || k<0 || board[k]!==0) break;
@@ -400,11 +356,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 9;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         
                         if((k+1)%8===0 || k>63 || board[k]!==0) break;
@@ -415,11 +369,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 9;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
         
                         if((k)%8===0 || k<0 || board[k]!==0) break;
@@ -430,11 +382,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 7;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         if((k)%8===0 || k>63 || board[k]!==0) break;
                     }
@@ -445,11 +395,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 7;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
     
                     if((k+1)%8===0 || k<0 || board[k]!==0) break;
@@ -460,11 +408,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 9;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
                     
                     if((k+1)%8===0 || k>63 || board[k]!==0) break;
@@ -474,11 +420,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 9;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
     
                     if((k)%8===0 || k<0 || board[k]!==0) break;
@@ -489,11 +433,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 7;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
                     if((k)%8===0 || k>63 || board[k]!==0) break;
                 }
@@ -507,11 +449,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 8;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
         
                         if(k<0 || board[k]!==0) break;
@@ -522,11 +462,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 1;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         
                         if((k+1)%8===0 ||board[k]!==0) break;
@@ -536,11 +474,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 8;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -550,11 +486,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 1;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
         
                         if((k)%8===0 || board[k]!==0) break;
@@ -565,11 +499,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 8;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -578,11 +510,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 8;
                         if(board[k]>0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                            boardBtns[k].isValid=true;
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -593,11 +523,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 8;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
     
                     if(k<0 || board[k]!==0) break;
@@ -608,11 +536,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 8;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
                     
                     if(k>63 || board[k]!==0) break;
@@ -622,11 +548,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 1;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
     
                     if((k)%8===0 ||board[k]!==0) break;
@@ -637,11 +561,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 1;
                     if(board[k]>0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
-                        boardBtns[k].isValid=true;
+                        validMoves.push(k);
                     }
                     if((k+1)%8===0 ||board[k]!==0) break;
                 }
@@ -674,11 +596,9 @@ function userMoveGenerator(n){
             }
             arr.forEach((item)=>{
                 if(board[n+item]>0){
-                    boardBtns[n+item].button.style.backgroundColor = "rgb(250,80,80)";
-                    boardBtns[n+item].isValid=true;
+                    validMoves.push(n+item);
                 }else if(board[n+item]===0){
-                    boardBtns[n+item].button.style.backgroundColor = "rgb(50,50,150)";
-                    boardBtns[n+item].isValid=true;
+                    validMoves.push(n+item);
                 }
 
             })
@@ -688,21 +608,21 @@ function userMoveGenerator(n){
         case 1:{
             if(n > 7 && n < 16){
                 if(board[n+8]===0){
-                    boardBtns[n+8].button.style.backgroundColor = "rgb(50,50,150)";
+                    validMoves.push(n+8);
                 }
                 if(board[n+16]===0){
-                    boardBtns[n+16].button.style.backgroundColor = "rgb(50,50,150)";
+                    validMoves.push(n+16);
                 }
             }else{
                 if(board[n+8]===0){
-                    boardBtns[n+8].button.style.backgroundColor = "rgb(50,50,150)";
+                    validMoves.push(n+8);
                 }
             }
             if(board[n+9]<0 && (n+1)%8!==0){
-                boardBtns[n+9].button.style.backgroundColor = "rgb(250,80,80)";
+                validMoves.push(n+9);
             }
             if(board[n+7]<0 && n%8!==0){
-                boardBtns[n+7].button.style.backgroundColor = "rgb(250,80,80)";
+                validMoves.push(n+7);
             }
             break;
         }
@@ -759,9 +679,9 @@ function userMoveGenerator(n){
 
             arr.forEach((item)=>{
                 if(board[n+item]<0){
-                    boardBtns[n+item].button.style.backgroundColor = "rgb(250,80,80)";
+                    validMoves.push(n+item);
                 }else if(board[n+item]===0){
-                    boardBtns[n+item].button.style.backgroundColor = "rgb(50,50,150)";
+                    validMoves.push(n+item);
                 }
 
             })
@@ -775,9 +695,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 7;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
         
                         if((k+1)%8===0 || k<0 || board[k]!==0) break;
@@ -788,9 +708,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 9;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         
                         if((k+1)%8===0 || k>63 || board[k]!==0) break;
@@ -801,9 +721,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 9;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
         
                         if((k)%8===0 || k<0 || board[k]!==0) break;
@@ -814,9 +734,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 7;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         if((k)%8===0 || k>63 || board[k]!==0) break;
                     }
@@ -827,9 +747,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 7;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
     
                     if((k+1)%8===0 || k<0 || board[k]!==0) break;
@@ -840,9 +760,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 9;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
                     
                     if((k+1)%8===0 || k>63 || board[k]!==0) break;
@@ -852,9 +772,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 9;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
     
                     if((k)%8===0 || k<0 || board[k]!==0) break;
@@ -865,9 +785,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 7;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
                     if((k)%8===0 || k>63 || board[k]!==0) break;
                 }
@@ -882,9 +802,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 8;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
         
                         if(k<0 || board[k]!==0) break;
@@ -895,9 +815,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 1;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         
                         if((k+1)%8===0 ||board[k]!==0) break;
@@ -907,9 +827,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 8;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -919,9 +839,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 1;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
         
                         if((k)%8===0 || board[k]!==0) break;
@@ -932,9 +852,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 8;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -943,9 +863,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 8;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -956,9 +876,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 8;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
     
                     if(k<0 || board[k]!==0) break;
@@ -969,9 +889,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 8;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
                     
                     if(k>63 || board[k]!==0) break;
@@ -981,9 +901,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 1;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
     
                     if((k)%8===0 ||board[k]!==0) break;
@@ -994,9 +914,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 1;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
                     if((k+1)%8===0 ||board[k]!==0) break;
                 }
@@ -1014,11 +934,10 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 7;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
-        
                         if((k+1)%8===0 || k<0 || board[k]!==0) break;
                     }
         
@@ -1027,9 +946,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 9;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         
                         if((k+1)%8===0 || k>63 || board[k]!==0) break;
@@ -1040,9 +959,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 9;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
         
                         if((k)%8===0 || k<0 || board[k]!==0) break;
@@ -1053,9 +972,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 7;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         if((k)%8===0 || k>63 || board[k]!==0) break;
                     }
@@ -1066,9 +985,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 7;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
     
                     if((k+1)%8===0 || k<0 || board[k]!==0) break;
@@ -1079,9 +998,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 9;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
                     
                     if((k+1)%8===0 || k>63 || board[k]!==0) break;
@@ -1091,9 +1010,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 9;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
     
                     if((k)%8===0 || k<0 || board[k]!==0) break;
@@ -1104,9 +1023,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 7;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
                     if((k)%8===0 || k>63 || board[k]!==0) break;
                 }
@@ -1120,9 +1039,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 8;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
         
                         if(k<0 || board[k]!==0) break;
@@ -1133,9 +1052,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 1;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         
                         if((k+1)%8===0 ||board[k]!==0) break;
@@ -1145,9 +1064,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 8;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -1157,9 +1076,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 1;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
         
                         if((k)%8===0 || board[k]!==0) break;
@@ -1170,9 +1089,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k + 8;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -1181,9 +1100,9 @@ function userMoveGenerator(n){
                     while(1){
                         k = k - 8;
                         if(board[k]<0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                            validMoves.push(k);
                         }else if(board[k]===0){
-                            boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                            validMoves.push(k);
                         }
                         if(k>63 || board[k]!==0) break;
                     }
@@ -1194,9 +1113,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 8;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
     
                     if(k<0 || board[k]!==0) break;
@@ -1207,9 +1126,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 8;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
                     
                     if(k>63 || board[k]!==0) break;
@@ -1219,9 +1138,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k - 1;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
     
                     if((k)%8===0 ||board[k]!==0) break;
@@ -1232,9 +1151,9 @@ function userMoveGenerator(n){
                 while(1){
                     k = k + 1;
                     if(board[k]<0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(250,80,80)";
+                        validMoves.push(k);
                     }else if(board[k]===0){
-                        boardBtns[k].button.style.backgroundColor = "rgb(50,50,150)";
+                        validMoves.push(k);
                     }
                     if((k+1)%8===0 ||board[k]!==0) break;
                 }
@@ -1267,13 +1186,111 @@ function userMoveGenerator(n){
             }
             arr.forEach((item)=>{
                 if(board[n+item]<0){
-                    boardBtns[n+item].button.style.backgroundColor = "rgb(250,80,80)";
+                    validMoves.push(n+item);
                 }else if(board[n+item]===0){
-                    boardBtns[n+item].button.style.backgroundColor = "rgb(50,50,150)";
+                    validMoves.push(n+item);
                 }
 
-            })
+            });
            break;
         }
     }
+    return validMoves;
+}
+
+
+
+function evaluate(){
+    var result=0;
+    for(let i =0;i<64;i++){
+        result +=board[i];
+    }
+    return result;
+}
+
+var max_i;
+var max_j;
+var max = -999999;
+var min = 999999;
+var result;
+
+var testBoard = board;
+function minimax(depth,isMaximising){
+    if(depth===0){
+        return evaluate();
+    }
+    
+    if(isMaximising){
+        for(let i = 0;i<64;i++){
+            
+            if(testBoard[i]>0){
+                var validMoves = moveGenerator(i);
+    
+                validMoves.forEach((item)=>{
+                    var temp = board[item];
+                    testBoard[item] = testBoard[i];
+                    testBoard[i]=0;
+                    result = minimax(depth-1,false);
+                    console.log("comp: " +result);
+                    testBoard[i] = testBoard[item];
+                    testBoard[item] = temp;
+                    if(result>max && board[i]>0){
+                        console.log("df");
+                        max = result;
+                        max_i = i;
+                        max_j = item;
+                    }
+    
+                })
+            }
+        }
+    }else{
+        for(let i = 0;i<64;i++){
+            var result=0;
+            if(testBoard[i]<0){
+                var validMoves = moveGenerator(i);
+    
+                validMoves.forEach((item)=>{
+                    var temp = board[item];
+                    testBoard[item] = testBoard[i];
+                    testBoard[i]=0;
+                    result = minimax(depth-1,true);
+                    console.log("user: " + min+ " " +result);
+                    testBoard[i] = testBoard[item];
+                    testBoard[item] = temp;
+    
+                    if(result<min ){
+                        console.log("result:"+result);
+                        min = result;
+                        return result;
+                    }
+    
+                })
+            }
+        }
+    }
+
+}
+
+function compMove(){
+    testBoard = board;
+    max = -999999;
+    min = 999999;
+    minimax(2,true);
+    console.log(max_i + " " + max_j);
+    console.log(board);
+    boardBtns[max_j].button.innerHTML = boardBtns[max_i].button.innerHTML;
+    boardBtns[max_j].pieceValue = boardBtns[max_i].pieceValue;
+    board[max_j]=board[max_i];
+    
+    boardBtns[max_i].button.innerHTML = "";
+    boardBtns[max_i].pieceValue=0;
+    board[max_i]=0;
+    //pawn becomes queen
+    if(boardBtns[max_j].pieceValue===1 && max_j>55){
+        board[max_j]=9;
+        boardBtns[max_j].button.innerHTML = `<img src='./res/blackQueen.png'>`;
+        boardBtns[max_j].pieceValue = board[max_i];
+    }
+    isUser=true;
 }

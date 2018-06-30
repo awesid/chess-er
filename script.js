@@ -166,7 +166,7 @@ function listeners(){
             event.preventDefault();
             if(isUser){
     
-                if(boardBtns[i].isClicked === false && boardBtns[i].pieceValue < 0 ){
+                if(boardBtns[i].isClicked === false && boardBtns[i].pieceValue<0 ){
                     for(let j=0;j<64;j++){
                         boardBtns[j].isValid = false;
                         boardBtns[j].isClicked = false;
@@ -181,52 +181,32 @@ function listeners(){
                 if(boardBtns[i].isClicked===false && boardBtns[i].isValid===true){
                     for(let j = 0;j < 64; j++){
                         if(boardBtns[j].isClicked === true){
-        
-                            if(board[i]===0){
-                                // when moves to an empty space
-                                boardBtns[i].button.innerHTML = swap(boardBtns[j].button.innerHTML, 
-                                    boardBtns[j].button.innerHTML = boardBtns[i].button.innerHTML);
-                                boardBtns[i].pieceValue = swap(boardBtns[j].pieceValue,
-                                    boardBtns[j].pieceValue=boardBtns[i].pieceValue);
-                                board[i] = swap(board[j],board[j]=board[i]);
-                                
-                                //pawn becomes queen
-                                if(boardBtns[i].pieceValue===-1 && i<8){
-                                    board[i]=-9;
-                                    boardBtns[i].button.innerHTML = `<img src='./res/whiteQueen.png'>`;
-                                    boardBtns[i].pieceValue = board[i];
-                                }
-                            }else{
 
-                                // when cuts an opponent
+                            boardBtns[i].button.innerHTML = boardBtns[j].button.innerHTML;
+                            boardBtns[i].pieceValue = boardBtns[j].pieceValue;
+                            board[i]=board[j];
                             
-                                boardBtns[i].button.innerHTML = boardBtns[j].button.innerHTML;
-                                boardBtns[i].pieceValue = boardBtns[j].pieceValue;
-                                board[i]=board[j];
-                                
-                                boardBtns[j].button.innerHTML = "";
-                                boardBtns[j].pieceValue=0;
-                                board[j]=0;
-                        
+                            boardBtns[j].button.innerHTML = "";
+                            boardBtns[j].pieceValue=0;
+                            board[j]=0;
 
-                                //pawn becomes queen
-                                if(boardBtns[i].pieceValue===-1 && i<8){
-                                    board[i]=-9;
-                                    boardBtns[i].button.innerHTML = `<img src='./res/whiteQueen.png'>`;
-                                    boardBtns[i].pieceValue = board[i];
-                                }
-                                
+                            if(boardBtns[i].pieceValue===-1 && i<8){
+                                board[i]=-9;
+                                boardBtns[i].button.innerHTML = `<img src='./res/whiteQueen.png'>`;
+                                boardBtns[i].pieceValue = board[i];
                             }
-
+    
 
                             boardBtns[j].isClicked = false;
                             setBoard();
+                            isUser = false;
                         }
                     }
                     for(let j=0;j<64;j++){
                         boardBtns[j].isValid = false;
                         boardBtns[j].isClicked=false;
                     }
+                    compMove();
                 }
             }
         })
