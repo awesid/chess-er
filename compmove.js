@@ -1210,12 +1210,12 @@ function evaluate(){
 
 var max_i;
 var max_j;
-var max = -999999;
-var min = 999999;
 var result;
 
 var testBoard = board;
-function minimax(depth,isMaximising){
+
+
+function minimax(depth,isMaximising,max,min){
     if(depth===0){
         return evaluate();
     }
@@ -1227,11 +1227,11 @@ function minimax(depth,isMaximising){
                 var validMoves = moveGenerator(i);
     
                 validMoves.forEach((item)=>{
-                    var temp = board[item];
+                    var temp = testBoard[item];
                     testBoard[item] = testBoard[i];
                     testBoard[i]=0;
-                    result = minimax(depth-1,false);
-                    console.log("comp: " +result);
+                    result = minimax(depth-1,false,max,min);
+                    console.log("comp: " + max + " " + result);
                     testBoard[i] = testBoard[item];
                     testBoard[item] = temp;
                     if(result>max && board[i]>0){
@@ -1240,7 +1240,6 @@ function minimax(depth,isMaximising){
                         max_i = i;
                         max_j = item;
                     }
-    
                 })
             }
         }
@@ -1251,10 +1250,10 @@ function minimax(depth,isMaximising){
                 var validMoves = moveGenerator(i);
     
                 validMoves.forEach((item)=>{
-                    var temp = board[item];
+                    var temp = testBoard[item];
                     testBoard[item] = testBoard[i];
                     testBoard[i]=0;
-                    result = minimax(depth-1,true);
+                    result = minimax(depth-1,true,max,min);
                     console.log("user: " + min+ " " +result);
                     testBoard[i] = testBoard[item];
                     testBoard[item] = temp;
@@ -1262,10 +1261,10 @@ function minimax(depth,isMaximising){
                     if(result<min ){
                         console.log("result:"+result);
                         min = result;
-                        return result;
                     }
     
-                })
+                });
+                return result;
             }
         }
     }
@@ -1274,10 +1273,8 @@ function minimax(depth,isMaximising){
 
 function compMove(){
     testBoard = board;
-    max = -999999;
-    min = 999999;
-    minimax(2,true);
-    console.log(max_i + " " + max_j);
+    result = minimax(2,true,-999999,999999);
+    console.log(max_i + " " + max_j + " " + result);
     console.log(board);
     boardBtns[max_j].button.innerHTML = boardBtns[max_i].button.innerHTML;
     boardBtns[max_j].pieceValue = boardBtns[max_i].pieceValue;
