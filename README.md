@@ -2,6 +2,8 @@
 
 It's an chess engine which uses minimax algorithm to detect the next move.
 
+###### Head to: [Chess'er](https://awesid.github.io/chess-er/)
+
 
 
 ### Help Needed: 
