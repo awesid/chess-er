@@ -1,4 +1,4 @@
-/*var username;
+var username;
 var usernameinp = document.getElementById('username')
 var usernamebtn = document.getElementById("usernamebtn");
 var inputIsEmpty = document.getElementById('inputIsEmpty');
@@ -16,7 +16,7 @@ usernamebtn.addEventListener('click',(event)=>{
     }
 
 });
-*/
+
 
 //boardbtns holds all the buttons in the display
 //boardBtns hold the buttons with additional meta data required for game
@@ -206,6 +206,8 @@ function listeners(){
                         boardBtns[j].isValid = false;
                         boardBtns[j].isClicked=false;
                     }
+
+                    checkKing(isUser);
                     compMove();
                 }
             }
@@ -213,3 +215,36 @@ function listeners(){
     }
 }
 
+
+
+function checkKing(isUser){
+    flag = true;
+    console.log("sdf");
+    //$('#checkModal').modal('show');
+    if(!isUser){
+        for(let i = 0;i<64;i++){
+            if(board[i]>100) flag = false;
+        }
+        if(flag===true){
+            var p = document.getElementById("result");
+            p.innerHTML = "You Won!!"
+            $('#checkModal').modal('show');
+        }
+    }else{
+        for(let i = 0;i<64;i++){
+            if(board[i]<-100) flag = false;
+        }
+        if(flag===true){
+            var p = document.getElementById("result");
+            p.innerHTML = "You Lost!!"
+            $('#checkModal').modal('show');
+        }
+    } 
+}
+
+
+var startNew = document.getElementById("startNew");
+startNew.addEventListener("click",(event)=>{
+    event.preventDefault();
+    window.location.reload();
+})

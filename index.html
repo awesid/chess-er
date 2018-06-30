@@ -25,7 +25,7 @@
 </head>
 <body>
     
-    <!--username modal.. takes player name
+    <!--username modal.. takes player name-->
     <div class="modal fade" data-backdrop="false" id="userModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
@@ -43,7 +43,7 @@
             </div>
         </div>
     </div>
--->
+
     
 
   <!--Welcome aboard-->
@@ -51,6 +51,23 @@
   <div id = "chessBoardColumn" class="btn-group-vertical">
     
   </div>
+
+
+  <div class="modal fade" data-backdrop="false" id="checkModal" tabindex="-1" role="dialog" aria-labelledby="checkModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="checkModalLabel">Game Result</h2>
+            </div>
+            <div class="modal-body">
+                <p id = "result"></p>
+            </div>
+            <div class="modal-footer">
+                <button id="closeResult" type="button" class="btn btn-secondary" data-dismiss="checkModal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
   <script src="script.js"></script>
   <script src="usermove.js"></script>
   <script src="compmove.js"></script>

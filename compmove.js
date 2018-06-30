@@ -19,7 +19,7 @@ function moveGenerator(n){
                 if(board[n-8]===0){
                     validMoves.push(n-8);
                 }
-                if(board[n-16]===0){
+                if(board[n-16]===0 && board[n-8]===0){
                     validMoves.push(n-16);
                 }
             }else{
@@ -610,7 +610,7 @@ function moveGenerator(n){
                 if(board[n+8]===0){
                     validMoves.push(n+8);
                 }
-                if(board[n+16]===0){
+                if(board[n+16]===0 && board[n+8]===0){
                     validMoves.push(n+16);
                 }
             }else{
@@ -1289,5 +1289,7 @@ function compMove(){
         boardBtns[max_j].button.innerHTML = `<img src='./res/blackQueen.png'>`;
         boardBtns[max_j].pieceValue = board[max_i];
     }
+
     isUser=true;
+    checkKing(isUser);
 }

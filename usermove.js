@@ -19,7 +19,7 @@ function userMoveGenerator(n){
                     boardBtns[n-8].button.style.backgroundColor = "rgb(50,50,150)";
                     boardBtns[n-8].isValid= true;
                 }
-                if(board[n-16]===0){
+                if(board[n-16]===0 && board[n-8]==0){
                     boardBtns[n-16].button.style.backgroundColor = "rgb(50,50,150)";
                     boardBtns[n-16].isValid=true;
                 }
@@ -690,7 +690,7 @@ function userMoveGenerator(n){
                 if(board[n+8]===0){
                     boardBtns[n+8].button.style.backgroundColor = "rgb(50,50,150)";
                 }
-                if(board[n+16]===0){
+                if(board[n+16]===0 && board[n+8]===0){
                     boardBtns[n+16].button.style.backgroundColor = "rgb(50,50,150)";
                 }
             }else{
