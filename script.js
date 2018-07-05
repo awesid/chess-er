@@ -243,8 +243,8 @@ function checkKing(isUser){
 }
 
 
-var startNew = document.getElementById("startNew");
-startNew.addEventListener("click",(event)=>{
-    event.preventDefault();
-    window.location.reload();
-})
+// var startNew = document.getElementById("startNew");
+// startNew.addEventListener("click",(event)=>{
+//     event.preventDefault();
+//     window.location.reload();
+// })
