@@ -2,8 +2,8 @@
   "short_name": "Chess",
   "name": "Chess-er",
   "icons": [{
-      "src": "index.jpeg",
-      "type": "image/jpeg",
+      "src": "index.png",
+      "type": "image/png",
       "sizes": "192x192"
     },
     {
