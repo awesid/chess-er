@@ -1,10 +1,10 @@
 var cacheName = 'chess';
 var filesToCache = [
   '/',
-  '/index.html',
-  '/style.css',
-  '/script.js',
-  '/compmove.js'
+  'index.html',
+  'style.css',
+  'script.js',
+  'compmove.js'
 ];
 
 self.addEventListener('install', function(e) {
