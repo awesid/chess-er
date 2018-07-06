@@ -1,6 +1,5 @@
 var cacheName = 'chess';
 var filesToCache = [
-  '/',
   'index.html',
   'style.css',
   'script.js',
